@@ -232,7 +232,7 @@ export default function UserInfomation() {
             <AboutMeContentDiv>
               {/* Some content about me */}
               <p>Ho Chi Minh City, Dist 5.</p>
-              <p>Word Hard, Play Hard !!!!!</p>
+              <p>Work Hard, Play Hard !!!!!</p>
               {/* link */}
               <Stack spacing={1}>{linkArray && linkRender(linkArray)}</Stack>
             </AboutMeContentDiv>
