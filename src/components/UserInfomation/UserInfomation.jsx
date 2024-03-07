@@ -222,7 +222,7 @@ export default function UserInfomation() {
         <UserDetails>
           {/* Displayname and Username */}
           <div>
-            <DisplayName>Jinnnnn</DisplayName>
+            <DisplayName>Luong Dang</DisplayName>
             <UserName>iamjinnnnn___</UserName>
           </div>
           <Space />

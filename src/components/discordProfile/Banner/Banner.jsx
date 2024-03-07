@@ -10,7 +10,7 @@ const MyBanner = styled("img")`
 `;
 
 const BannerDiv = styled("div")`
-  background-image: url("https://i.pinimg.com/originals/44/eb/17/44eb17afabc36a2df89e9bed6494587b.gif");
+  background-image: url("https://i.pinimg.com/originals/05/f1/7d/05f17d6e87ad18f65940f896f4cf11a4.gif");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
