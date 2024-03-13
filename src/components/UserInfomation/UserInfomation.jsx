@@ -93,7 +93,7 @@ const RoleLogo = styled("img")`
   object-fit: cover;
 `;
 
-export default function UserInfomation() {
+export default function UserInfomation({ user }) {
   // Link array: if wanna add some new link into your profile just push an new object in linkArray and change their value you want
   const linkArray = [
     {
@@ -169,8 +169,10 @@ export default function UserInfomation() {
     },
   ];
 
-  const roleRender = (array) => {
-    return array.map((item) => {
+  const pfp = user[0]?.pfp || "";
+
+  const roleRender = (arr) => {
+    return arr.map((item) => {
       return (
         <Role key={item.id}>
           <RoleDot style={{ backgroundColor: item.color }} />
@@ -185,8 +187,8 @@ export default function UserInfomation() {
     });
   };
 
-  const linkRender = (array) => {
-    return array.map((item) => {
+  const linkRender = (arr) => {
+    return arr.map((item) => {
       return (
         <Link
           key={item.id}
@@ -203,6 +205,17 @@ export default function UserInfomation() {
     });
   };
 
+  const usernameRender = (arr) => {
+    return arr.map((item) => {
+      return (
+        <div key={item.id}>
+          <DisplayName>{item.name}</DisplayName>
+          <UserName>{item.nickname}</UserName>
+        </div>
+      );
+    });
+  };
+
   return (
     <Fragment>
       <Container>
@@ -215,16 +228,13 @@ export default function UserInfomation() {
             top: "-60px",
           }}
         >
-          <UserAvatar />
+          <UserAvatar pfp={pfp} />
           <IconGroup />
         </div>
         {/* User Details Part */}
         <UserDetails>
           {/* Displayname and Username */}
-          <div>
-            <DisplayName>Luong Dang</DisplayName>
-            <UserName>iamjinnnnn___</UserName>
-          </div>
+          {user.length > 0 && usernameRender(user)}
           <Space />
           {/* About Me */}
           <div>

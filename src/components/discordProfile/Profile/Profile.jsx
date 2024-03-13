@@ -3,6 +3,8 @@ import { styled } from "@mui/material";
 import Banner from "../Banner/Banner";
 import UserInfomation from "../../UserInfomation/UserInfomation";
 import "animate.css";
+import { useQuery } from "@tanstack/react-query";
+import { getUserInf } from "../../../apis/userAPI";
 
 const MyProfile = styled("div")`
   position: absolute;
@@ -18,10 +20,17 @@ const MyProfile = styled("div")`
 `;
 
 export default function Profile() {
+  const { data: user = {} } = useQuery({
+    queryKey: ["user"],
+    queryFn: () => getUserInf(),
+  });
+
+  const banner = user[0]?.banner || "";
+
   return (
     <MyProfile>
-      <Banner />
-      <UserInfomation />
+      <Banner banner={banner} />
+      <UserInfomation user={user} />
     </MyProfile>
   );
 }
