@@ -6,12 +6,8 @@ import DiscordLogo from "../../assets/img/discord2.png";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import GitHubIcon from "@mui/icons-material/GitHub";
 import InstagramIcon from "@mui/icons-material/Instagram";
-import HTML from "../../assets/img/html.png";
-import CSS from "../../assets/img/css.png";
-import JavaScript from "../../assets/img/javascript.png";
-import SASS from "../../assets/img/sass.png";
-import GIT from "../../assets/img/git.png";
-import ReactJs from "../../assets/img/react.png";
+import { useQuery } from "@tanstack/react-query";
+import { getRoles } from "../../apis/rolesAPI";
 
 const UserDetails = styled("div")`
   background-color: #000000a2;
@@ -116,58 +112,11 @@ export default function UserInfomation({ user }) {
     },
   ];
 
-  // Role array: if wanna add some new role,do the same step as link Array
-  // for the icon: u can also using url instead of local file from ur PC
-  const roleArray = [
-    {
-      id: 1,
-      name: "HTML",
-      icon: HTML,
-      color: "#f3936c",
-    },
-    {
-      id: 2,
-      name: "CSS",
-      icon: CSS,
-      color: "#2397F3",
-    },
-    {
-      id: 3,
-      name: "Javascript",
-      icon: JavaScript,
-      color: "#F7DF1E",
-    },
-    {
-      id: 4,
-      name: "Git Hub",
-      icon: GIT,
-      color: "#DE4C36",
-    },
-    {
-      id: 5,
-      name: "SASS",
-      icon: SASS,
-      color: "#C46093",
-    },
-    {
-      id: 6,
-      name: "React JS",
-      icon: ReactJs,
-      color: "#0B98B1",
-    },
-    {
-      id: 7,
-      name: "Jinnnnn",
-      icon: "https://i.pinimg.com/736x/78/c6/cf/78c6cfc484d4cf4a1fe3b19aa6f1c7e3.jpg",
-      color: "#B192F5",
-    },
-    {
-      id: 8,
-      name: "Perm Nitro",
-      icon: "https://i.pinimg.com/originals/15/8b/88/158b886aca8ce4421934166eed498481.gif",
-      color: "#7489D8",
-    },
-  ];
+  // call api for roles
+  const { data: roles = [] } = useQuery({
+    queryKey: ["roles"],
+    queryFn: () => getRoles(),
+  });
 
   const pfp = user[0]?.pfp || "";
 
@@ -258,7 +207,7 @@ export default function UserInfomation({ user }) {
           {/* ROLES */}
           <div>
             <Title>ROLES</Title>
-            <RoleDiv>{roleArray && roleRender(roleArray)}</RoleDiv>
+            <RoleDiv>{roles && roleRender(roles)}</RoleDiv>
           </div>
         </UserDetails>
       </Container>
