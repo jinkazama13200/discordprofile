@@ -1,4 +1,12 @@
-import { Container, Divider, Button, Box, styled, Stack } from "@mui/material";
+import {
+  Container,
+  Divider,
+  Button,
+  Box,
+  styled,
+  Stack,
+  Skeleton,
+} from "@mui/material";
 import React, { Fragment } from "react";
 import UserAvatar from "../discordProfile/UserAvatar/UserAvatar";
 import IconGroup from "../discordProfile/IconGroup/IconGroup";
@@ -89,7 +97,7 @@ const RoleLogo = styled("img")`
   object-fit: cover;
 `;
 
-export default function UserInfomation({ user }) {
+export default function UserInfomation({ user, isLoading }) {
   // Link array: if wanna add some new link into your profile just push an new object in linkArray and change their value you want
   const linkArray = [
     {
@@ -113,7 +121,7 @@ export default function UserInfomation({ user }) {
   ];
 
   // call api for roles
-  const { data: roles = [] } = useQuery({
+  const { data: roles = [], isLoading: rolesLoading } = useQuery({
     queryKey: ["roles"],
     queryFn: () => getRoles(),
   });
@@ -177,37 +185,67 @@ export default function UserInfomation({ user }) {
             top: "-60px",
           }}
         >
-          <UserAvatar pfp={pfp} />
-          <IconGroup />
+          <UserAvatar pfp={pfp} isLoading={isLoading} />
+          <IconGroup isLoading={isLoading} />
         </div>
         {/* User Details Part */}
         <UserDetails>
           {/* Displayname and Username */}
-          {user.length > 0 && usernameRender(user)}
+          {isLoading ? (
+            <Stack spacing={1}>
+              <Skeleton variant="text" animation="wave" width="150px" />
+              <Skeleton variant="text" animation="wave" width="100px" />
+            </Stack>
+          ) : (
+            user.length > 0 && usernameRender(user)
+          )}
           <Space />
           {/* About Me */}
           <div>
             <Title>ABOUT ME</Title>
-            <AboutMeContentDiv>
-              {/* Some content about me */}
-              <p>Ho Chi Minh City, Dist 5.</p>
-              <p>Work Hard, Play Hard !!!!!</p>
-              {/* link */}
-              <Stack spacing={1}>{linkArray && linkRender(linkArray)}</Stack>
-            </AboutMeContentDiv>
+            {isLoading ? (
+              <Stack spacing={1}>
+                <Skeleton variant="text" animation="wave" width="150px" />
+                <Skeleton variant="text" animation="wave" width="100px" />
+                <Skeleton variant="rectangular" animation="wave" width="100%" />
+                <Skeleton variant="rectangular" animation="wave" width="100%" />
+                <Skeleton variant="rectangular" animation="wave" width="100%" />
+              </Stack>
+            ) : (
+              <AboutMeContentDiv>
+                {/* about me */}
+                <p>Ho Chi Minh City, Dist 5.</p>
+                <p>Work Hard, Play Hard !!!!!</p>
+                {/* link */}
+                <Stack spacing={1}>{linkArray && linkRender(linkArray)}</Stack>
+              </AboutMeContentDiv>
+            )}
           </div>
           {/* Member Since */}
           <div>
             <Title>DISCORD MEMBER SINCE</Title>
-            <DateDiv>
-              <Logo src={DiscordLogo} alt="discord-logo" />
-              <Date>Nov 27, 2020</Date>
-            </DateDiv>
+            {isLoading ? (
+              <Skeleton variant="text" animation="wave" width="150px" />
+            ) : (
+              <DateDiv>
+                <Logo src={DiscordLogo} alt="discord-logo" />
+                <Date>Nov 27, 2020</Date>
+              </DateDiv>
+            )}
           </div>
           {/* ROLES */}
           <div>
             <Title>ROLES</Title>
-            <RoleDiv>{roles && roleRender(roles)}</RoleDiv>
+            {rolesLoading ? (
+              <Stack spacing={1} direction="column">
+                <Skeleton variant="text" animation="wave" width="100%" />
+                <Skeleton variant="text" animation="wave" width="100%" />
+                <Skeleton variant="text" animation="wave" width="100%" />
+                <Skeleton variant="text" animation="wave" width="100%" />
+              </Stack>
+            ) : (
+              <RoleDiv>{roles && roleRender(roles)}</RoleDiv>
+            )}
           </div>
         </UserDetails>
       </Container>

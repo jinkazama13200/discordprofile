@@ -1,8 +1,9 @@
 import { styled } from "@mui/material";
 import React from "react";
 import BannerImg from "../../../assets/img/fallen Shiba.png";
+import { Skeleton } from "@mui/material";
 
-export default function Banner({ banner }) {
+export default function Banner({ banner, isLoading }) {
   const BannerDiv = styled("div")`
     background-image: url(${banner});
     background-size: cover;
@@ -17,8 +18,19 @@ export default function Banner({ banner }) {
     opacity: 0;
   `;
   return (
-    <BannerDiv>
-      <MyBanner src={BannerImg} alt="discord-banner" />
-    </BannerDiv>
+    <>
+      {isLoading ? (
+        <Skeleton
+          variant="rectangular"
+          animation="wave"
+          width="100%"
+          height="120px"
+        />
+      ) : (
+        <BannerDiv>
+          <MyBanner src={BannerImg} alt="discord-banner" />
+        </BannerDiv>
+      )}
+    </>
   );
 }

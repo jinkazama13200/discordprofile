@@ -1,8 +1,7 @@
 import React, { Fragment } from "react";
 import User from "./UserMng/User";
 import Roles from "./RolesMng/Roles";
-import Icons from "./IconsMng/Icons";
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 
 export default function UserManager() {
   return (
@@ -18,7 +17,6 @@ export default function UserManager() {
       >
         <User />
         <Roles />
-        <Icons />
       </Box>
     </Fragment>
   );

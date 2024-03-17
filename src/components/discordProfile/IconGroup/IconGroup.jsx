@@ -1,30 +1,29 @@
 import React from "react";
-import { styled } from "@mui/material";
+import { Stack, Skeleton, styled } from "@mui/material";
 import Nitro from "../../../assets/img/discord-nitro.png";
 import Boost from "../../../assets/img/level-3-discord-boost.png";
 import Hype from "../../../assets/img/hypesquad19.gif";
 import Hype2 from "../../../assets/img/HypeSquad_Events39.png";
 
-const IconDiv = styled("div")`
-  display: flex;
-  justify-content: space-around;
-  background-color: black;
-  padding: 5px;
-  gap: 5px;
-  height: 100%;
-  border-radius: 10px;
-  position: relative;
-  top: 80px;
-`;
+export default function IconGroup({ isLoading }) {
+  const IconDiv = styled("div")`
+    display: flex;
+    justify-content: space-around;
+    background-color: ${isLoading ? "#00000045" : "black"};
+    padding: 5px;
+    gap: 5px;
+    height: 100%;
+    border-radius: 10px;
+    position: relative;
+    top: 80px;
+  `;
 
-const IconImg = styled("img")`
-  width: 20px;
-  height: 20px;
-  object-fit: cover;
-  cursor: pointer;
-`;
-
-export default function IconGroup() {
+  const IconImg = styled("img")`
+    width: 20px;
+    height: 20px;
+    object-fit: cover;
+    cursor: pointer;
+  `;
   const iconList = [
     {
       id: 1,
@@ -50,5 +49,32 @@ export default function IconGroup() {
     });
   };
 
-  return <IconDiv>{iconList.length > 0 && iconRender(iconList)}</IconDiv>;
+  return (
+    <IconDiv>
+      {isLoading ? (
+        <Stack spacing={1} direction="row">
+          <Skeleton
+            variant="circular"
+            animation="wave"
+            width="20px"
+            height="20px"
+          />
+          <Skeleton
+            variant="circular"
+            animation="wave"
+            width="20px"
+            height="20px"
+          />
+          <Skeleton
+            variant="circular"
+            animation="wave"
+            width="20px"
+            height="20px"
+          />
+        </Stack>
+      ) : (
+        iconList.length > 0 && iconRender(iconList)
+      )}
+    </IconDiv>
+  );
 }

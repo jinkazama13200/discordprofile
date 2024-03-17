@@ -16,11 +16,15 @@ const MyProfile = styled("div")`
   background-color: #232428;
   border-radius: 10px;
   width: 350px;
-  background: linear-gradient(to bottom, #b183b3 1%, #eb88ee 50%, #b32fff 100%);
+  background: linear-gradient(to right, #b183b3 1%, #eb88ee 50%, #b32fff 100%);
+  transition: 0.3s all;
+  &:hover {
+    border: 2px solid #fefefe;
+  }
 `;
 
 export default function Profile() {
-  const { data: user = {} } = useQuery({
+  const { data: user = {}, isLoading } = useQuery({
     queryKey: ["user"],
     queryFn: () => getUserInf(),
   });
@@ -29,8 +33,8 @@ export default function Profile() {
 
   return (
     <MyProfile>
-      <Banner banner={banner} />
-      <UserInfomation user={user} />
+      <Banner banner={banner} isLoading={isLoading} />
+      <UserInfomation user={user} isLoading={isLoading} />
     </MyProfile>
   );
 }

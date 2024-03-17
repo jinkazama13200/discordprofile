@@ -1,6 +1,13 @@
 import React, { Fragment, useEffect, useState } from "react";
 import styled from "@emotion/styled";
-import { Box, Button, Paper, TextField, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Paper,
+  TextField,
+  Tooltip,
+  Typography,
+} from "@mui/material";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { object, string } from "yup";
@@ -15,6 +22,7 @@ import {
 import PNG from "../../../assets/img/css.png";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import EditIcon from "@mui/icons-material/Edit";
+import IconButton from "@mui/material/IconButton";
 
 const rolesSchema = object({
   name: string().required("Empty."),
@@ -26,20 +34,9 @@ export default function Roles() {
   const queryClient = useQueryClient();
   const [selected, setSelected] = useState(null);
 
-  const ActionBtn = styled(Typography)`
-    font-weight: bold;
-    width: 20px;
-    height: 20px;
-    line-height: 20px;
-    text-align: center;
-    border-radius: 50%;
-    transition: 0.3s all;
-    cursor: pointer;
-    padding: 3px;
-    &:hover {
-      background-color: #000000;
-      color: #fefefe;
-    }
+  const ActionBtn = styled(Tooltip)`
+    width: 35px;
+    height: 35px;
   `;
 
   // call api get roles data using useQuery
@@ -115,6 +112,7 @@ export default function Roles() {
             cursor: "pointer",
             transition: "0.3s all",
             border: "2px solid transparent",
+            padding: "5px",
             "&:hover": {
               border: `2px solid ${item.color}`,
             },
@@ -146,16 +144,26 @@ export default function Roles() {
             <Box sx={{ display: "flex", gap: "5px" }} component="div">
               {/* EDIT BTN */}
               <ActionBtn
-                component={EditIcon}
                 sx={{ border: `2px solid ${item.color}` }}
                 onClick={() => handleGetRoleById(item.id)}
-              />
+                placement="bottom-start"
+                title="Edit"
+              >
+                <IconButton>
+                  <EditIcon />
+                </IconButton>
+              </ActionBtn>
               {/* REMOVE BTN */}
               <ActionBtn
                 sx={{ border: `2px solid ${item.color}` }}
-                component={DeleteForeverIcon}
                 onClick={() => handleRemoveRole(item.id)}
-              />
+                placement="bottom-start"
+                title="Remove"
+              >
+                <IconButton>
+                  <DeleteForeverIcon />
+                </IconButton>
+              </ActionBtn>
             </Box>
           </Box>
         </Box>
