@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useMemo, useState } from "react";
-import { Container, styled } from "@mui/material";
+import { Box, Container, styled } from "@mui/material";
 import Particles, { initParticlesEngine } from "@tsparticles/react";
 import { loadFull } from "tsparticles";
 import Profile from "./Profile/Profile";
@@ -89,10 +89,18 @@ export default function Main() {
 
   if (init) {
     return (
-      <Fragment>
-        <Particles id="tsparticles" options={options} />
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          alignItems: "center",
+          pt: 3,
+        }}
+      >
         <Profile />
-      </Fragment>
+        <Particles id="tsparticles" options={options} />
+      </Box>
     );
   }
 

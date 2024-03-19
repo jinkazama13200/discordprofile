@@ -7,19 +7,17 @@ import { useQuery } from "@tanstack/react-query";
 import { getUserInf } from "../../../apis/userAPI";
 
 const MyProfile = styled("div")`
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%) !important;
-  border: 2px solid transparent;
+  border: 1px solid #b32fff;
   color: white;
-  background-color: #232428;
   border-radius: 10px;
   width: 350px;
-  background: linear-gradient(to right, #b183b3 1%, #eb88ee 50%, #b32fff 100%);
+  background: linear-gradient(to right, #b183b3 0%, #b32fff 51%, #b183b3 100%);
+  background-size: 200%;
+  box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
   transition: 0.3s all;
+  z-index: 1;
   &:hover {
-    border: 2px solid #fefefe;
+    background-position: right;
   }
 `;
 

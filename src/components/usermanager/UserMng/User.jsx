@@ -61,6 +61,7 @@ export default function User() {
       <Box
         sx={{
           p: 2,
+          maxWidth: 500,
         }}
         component={Paper}
       >

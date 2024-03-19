@@ -183,8 +183,8 @@ export default function Roles() {
     <Fragment>
       <Box
         sx={{
-          marginTop: "20px",
           p: 2,
+          maxWidth: 500,
         }}
         component={Paper}
       >

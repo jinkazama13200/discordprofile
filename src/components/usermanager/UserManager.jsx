@@ -6,15 +6,7 @@ import { Box } from "@mui/material";
 export default function UserManager() {
   return (
     <Fragment>
-      <Box
-        sx={{
-          width: `calc(100% - 450px)`,
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%,-50%)",
-        }}
-      >
+      <Box sx={{display:"flex",flexDirection:'column',justifyContent:"center",alignItems:"center",gap:"20px",py:2}}>
         <User />
         <Roles />
       </Box>
