@@ -10,7 +10,7 @@ const MyProfile = styled("div")`
   border: 1px solid #b32fff;
   color: white;
   border-radius: 10px;
-  width: 350px;
+  max-width: 350px;
   background: linear-gradient(to right, #b183b3 0%, #b32fff 51%, #b183b3 100%);
   background-size: 200%;
   box-shadow: rgba(0, 0, 0, 0.19) 0px 10px 20px, rgba(0, 0, 0, 0.23) 0px 6px 6px;
@@ -30,7 +30,7 @@ export default function Profile() {
   const banner = user[0]?.banner || "";
 
   return (
-    <MyProfile>
+    <MyProfile className={!isLoading ? "animate__animated animate__flip" : ""}>
       <Banner banner={banner} isLoading={isLoading} />
       <UserInfomation user={user} isLoading={isLoading} />
     </MyProfile>

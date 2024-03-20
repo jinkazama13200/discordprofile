@@ -1,8 +1,6 @@
 import {
   Container,
-  Divider,
   Button,
-  Box,
   styled,
   Stack,
   Skeleton,
